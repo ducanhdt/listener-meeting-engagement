@@ -18,7 +18,7 @@
 
 ## 1. Introduction
 * **Context:** Meeting quality heavily depends on participant engagement (frank2016engagement). While active speakers provide rich verbal and prosodic markers (pelletrostaing2023multimodal), feedback from non-speaking participants is exceptionally subtle.
-* **The Paradigm Shift (Interactional Engagement):** We argue against treating the listener as a solo source. A silent listener's state is relational—manifested through behavioral alignment (mimicry/entrainment) with the group and through co-variation with the concurrently active speaker's nonverbal and prosodic behavior.
+* **The Paradigm Shift (Interactional Engagement):** **PP: I would not call this a paradigm shift. I'm not aware of it being a paradigm to start with!** We argue against treating the listener as a solo source. A silent listener's state is relational—manifested through behavioral alignment (mimicry/entrainment) with the group and through co-variation with the concurrently active speaker's nonverbal and prosodic behavior.
 * **Methodological Tension:** We address whether engagement forms a natural axis of unsupervised behavioral variation. Finding it does not, we deploy supervised cross-validation to map specific interactive feature effects.
 * **Core Contributions:**
     1. *Interaction Over Isolation:* Show that dyadic alignment outperforms individual-party features. Characterize the speaker's terminal pitch slope as a key communicative correlate.

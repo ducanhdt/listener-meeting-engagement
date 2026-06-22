@@ -8,9 +8,9 @@
 
 ## Abstract (~150 words)
 * **Problem/Gap:** Detecting the engagement of non-speaking participants in multi-party meetings remains a challenge. Prior work predominantly treats the listener as an isolated signal source or relies heavily on speaker-centric cues. Furthermore, unsupervised approaches often conflate behavioral variance with true engagement states.
-* **Methodology:** We frame listener engagement as inherently *interactional*. We evaluate the relationship between silent listeners and active speakers using two distinct lenses: (1) direct dyadic behavioral alignment (via low-dimensional cosine similarity), and (2) how the speaker explicitly addresses the silent listener via acoustic prosody. Models are evaluated using a strict, leakage-free cross-validation protocol against a majority baseline floor.
+* **Methodology:** We frame listener engagement as inherently *interactional*. We evaluate the relationship between silent listeners and active speakers using two distinct lenses: (1) direct dyadic behavioral alignment (via low-dimensional cosine similarity), and (2) the prosodic context of the concurrently active speaker, treated as local interactional context that co-varies with listener engagement. Models are evaluated using a strict, leakage-free cross-validation protocol against a majority baseline floor.
 * **Key Findings:** 1. Dyadic listener $\leftrightarrow$ speaker behavioral alignment is the single strongest predictor of engagement, improving Random Forest macro-$F_1$ from 0.341 to 0.378.
-    2. The speaker's terminal pitch slope tracks listener engagement as an interpretable dialogic marker ($+1.5$ st for Active, $-3.6$ st for Disengaged).
+    2. The concurrent speaker's terminal pitch slope co-varies with listener engagement as an interpretable interactional correlate ($+1.5$ st for Active, $-3.6$ st for Disengaged).
     3. Multimodal fusion requires compact architectures; high-dimensional difference encodings collapse performance.
     4. Unsupervised clustering ($k=2$) fails to recover engagement labels ($\text{ARI} \approx 0$). The 3-class annotation middle operates as an uncertainty hedge; a binary active-vs-rest reduction yields a highly learnable signal ($\text{macro-}F_1 \approx 0.63$).
 
@@ -18,7 +18,7 @@
 
 ## 1. Introduction
 * **Context:** Meeting quality heavily depends on participant engagement (frank2016engagement). While active speakers provide rich verbal and prosodic markers (pelletrostaing2023multimodal), feedback from non-speaking participants is exceptionally subtle.
-* **The Paradigm Shift (Interactional Engagement):** We argue against treating the listener as a solo source. A silent listener's state is relational—manifested through behavioral alignment (mimicry/entrainment) with the group and the active speaker addressing them.
+* **The Paradigm Shift (Interactional Engagement):** We argue against treating the listener as a solo source. A silent listener's state is relational—manifested through behavioral alignment (mimicry/entrainment) with the group and through co-variation with the concurrently active speaker's nonverbal and prosodic behavior.
 * **Methodological Tension:** We address whether engagement forms a natural axis of unsupervised behavioral variation. Finding it does not, we deploy supervised cross-validation to map specific interactive feature effects.
 * **Core Contributions:**
     1. *Interaction Over Isolation:* Show that dyadic alignment outperforms individual-party features. Characterize the speaker's terminal pitch slope as a key communicative correlate.
@@ -47,7 +47,7 @@
 
 ### 3.2 Corpus & Annotation Reliability
 * **Dataset:** GEHM Zoom corpus (paggio2024gehm); 12 remote multi-party meetings, ~8 hours, English. 
-* **Data Preparation:** 549 valid silent segments mapped to co-present references and active speakers via TextGrid alignments.
+* **Data Preparation:** 549 valid silent segments mapped to co-present references and active speakers via TextGrid alignments. The active speaker for a window is operationalized as the co-participant with the largest speech overlap during that window; in multi-party meetings this speaker typically addresses the group rather than the specific silent listener, so we interpret speaker-side cues as concurrent interactional context.
 * **The Reliability Constraint:** Label scarcity and noise shape our framework. Inter-rater agreement is modest (Fleiss' $\kappa = 0.42$). The middle "Low Engagement" class acts as an explicit coder hedge for ambiguous cases, concentrating the disagreement. Filtering for strict agreement yields 89 gold-labeled windows (44 Active, 28 Low, 17 Disengaged).
 
 ### 3.3 Feature Engineering
@@ -87,8 +87,8 @@
 * *Methodological Lesson:* High-dimensional difference encodings collapse performance ($F_1 = 0.231$), proving that elegant, low-dimensional cosine metrics are essential for low-resource multimodal tasks.
 
 ### 4.3 Communicative Correlate: Speaker Terminal Pitch Slope
-* Descriptive class means show a distinct vocal trend: speakers address **Active** listeners with rising intonation ($+1.5$ st), **Low-engagement** listeners with higher rises ($+2.6$ st), and **Disengaged** listeners with flat or falling tones ($-3.6$ st).
-* *Interpretation:* This is an interactional marker rather than a standalone feature predictor (its standalone supervised gain sits within fold variance). It highlights how speaker intonation structurally tracks the listener's state.
+* Descriptive class means show a distinct vocal trend: windows with **Active** listeners co-occur with speaker rising intonation ($+1.5$ st), **Low-engagement** listeners with higher rises ($+2.6$ st), and **Disengaged** listeners with flat or falling tones ($-3.6$ st).
+* *Interpretation:* This is a speaker-side prosodic correlate that co-varies with listener state, not a standalone predictor (its standalone supervised gain sits within fold variance). The speaker is identified by maximal speech overlap and generally addresses the group, we read this as local interactional context tracking the listener's state.
 
 ### 4.4 Resolving the Construct: Label-Scheme Sensitivity
 

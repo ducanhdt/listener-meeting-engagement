@@ -1,0 +1,315 @@
+%% The first command in your LaTeX source must be the \documentclass command.
+%%
+%% Options:
+%% twocolumn : Two column layout.
+%% hf: enable header and footer.
+\documentclass[
+% twocolumn,
+% hf,
+]{ceurart}
+
+%%
+%% One can fix some overfulls
+\sloppy
+
+%%
+%% Minted listings support 
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{makecell} 
+\usepackage{float}
+%% auto break lines
+\lstset{breaklines=true}
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command
+\title{\texorpdfstring{Engagement Prediction for Non-Speaking Participants\\in Online Meetings}{Engagement Prediction for Non-Speaking Participants in Online Meetings}}
+
+% \title[mode=sub]{Notebook for the <Lab name> Lab at CLEF 2025}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+
+\author[1]{Trung Duc Anh Dang}[%
+email=cls364@alumni.ku.dk,
+]
+\author[1]{Zhiqing Peng}[%
+email=tlr526@alumni.ku.dk,
+]
+
+% \cormark[1]
+
+\address[1]{University of Copenhagen, Denmark}
+
+% Footnotes
+
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+ Online meetings have become a cornerstone of modern work and education, yet understanding participant engagement without verbal participation remains a challenge. While active speakers provide clear engagement signals, nonspeaking participants' attention levels are more difficult to assess automatically. This study proposes a semi-supervised learning framework to predict engagement levels for non-speaking participants in online meetings using multimodal nonverbal cues. We leverage features such as head pose, head movement, facial expressions, hand gestures, and deep neural network features. We also investigate the impact of behavioral alignment patterns among co-present participants. Our methodology applys K-Means, Gaussian Mixture Models (GMM), and Hierarchical Clustering, along with a minimal supervision strategy for cluster label assignment. Experimental results demonstrate that incorporating alignment features generally improves engagement prediction, particularly with K-Means clustering. This improvement supports our hypothesis that behavioral alignment patterns can enhance engagement classification accuracy for non-speaking participants.
+\end{abstract}
+
+%%
+
+
+
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
+
+\section{Introduction}
+Online meetings have become a widely used means of communication across work and education due to the increasing need for remote collaboration. Over the past decade, a significant amount of research has focused on engagement detection, as it is a key indicator of meeting quality, productivity, and effectiveness \cite{frank2016engagement}. However, research on engagement detection mainly focuses on speakers, as they provide more explicit and quantifiable behavioral signals, especially prosodic-acoustic features \cite{pelletrostaing2023multimodal}. In contrast, listener feedback is often subtle and multifunctional, which makes it challenging to interpret and classify the level of engagement \cite{pelletrostaing2023multimodal}. As the engagement of listeners is also an important factor influencing the meeting dynamics and productivity, especially in online meetings, it is important to analyze the engagement of non-speaking participants.
+
+\subsection{Previous Research}
+Various behavioral features have been used for engagement detection and classification, including prosodic-acoustic cues, facial expressions, gestures, postures, head pose, and gaze behaviors \cite{oertel2011towards} \cite{singh2023attention} \cite{inoue2018engagement}. These features are extracted from audio and visual recording and have been shown to be informative cues for analyzing engagement levels. For example, Oertel et al. \cite{oertel2011towards} found that prosodic cues, head and body movement correlated with the level of involvement in conversation. 
+
+While features like prosodic-acoustic cues are unavailable for non-speaking participants, nonverbal features may provide informative cues for classifying engagement levels. Singh et al.\cite{singh2023attention} demonstrated that the combination of head pose, facial action units (AUs) and gaze improve the accuracy of predicting engagement of video viewers, suggesting nonverbal cues can be used to detect the engagement in non-speaking participant.
+
+\subsection{The Present Study}
+Inspired by these findings, our research explores the potential of multimodal nonverbal cues in predicting the level of engagement in non-speaking participants in online meetings. In this study, we adopt a behavioral definition of engagement proposed by Fredricks et al.\cite{fredricks2004school}, which refers to visible participation and involvement in interaction, and can be reflected through visual cues such as head pose, eye gaze, and facial expression \cite{kaur2018prediction}. Moreover, we further investigate whether behavioral alignment patterns among non-speaking participants can be additional indicators for predicting engagement levels. In particular, we propose using a combination of limited manually labeled data and semi-supervised learning techniques to identify and utilize such alignment patterns for engagement classification. 
+
+Our hypotheses are as follows: 1) Non-verbal cues, including head pose, head movement, facial expressions, and hand gestures, can be used to distinguish engagement levels. 2) Behavioral alignment patterns among non-speaking participants can improve engagement classification accuracy.
+
+Our experimental results partially support both hypotheses. Non-verbal features achieved moderate performance for engagement classification, with a best weighted F1-score of 0.40 using K-Means clustering. Adding alignment-based features improved classification performance, particularly for “Active engagement”, indicating that behavioral alignment among participants provide additional information to classify engagement levels. For more details, please check out our implementation\footnote{Implementation: https://github.com/ducanhdt/unsupervised-meeting-engagement}.
+
+The remainder of this paper is structured as follows: Section 2 introduces the methodology and experimental framework. Section 3 describes experimental setup including the dataset, feature extraction and annotation procedure. Section 4 presents the results and discusses findings and limitations. Section 5 concludes the paper and outlines our contributions and directions for future work.
+
+\section{Methodology}
+
+\subsection{Problem Formulation}
+This research addresses the challenge of predicting the engagement levels of non-speaking participants in online meetings through a semi-supervised learning framework. Given the limited availability of labeled training data, we define the problem as a clustering-based engagement prediction task where unlabeled video segments are grouped into meaningful engagement categories using minimal human supervision.
+
+Formally, let $X = \{x_1, x_2, ..., x_n\}$ represent our complete data set of 5-second video segments, where each segment $x_i$ contains multimodal features extracted from a non-speaking target participant and two additional meeting participants. We divide $X$ into an unlabeled training set $X_{train}$ and a human-labeled test set $X_{test}$. The objective is to learn a mapping function $f: X \rightarrow Y$ that predicts engagement levels $Y = \{\text{Disengagement, Intermittent engagement, Active engagement}\}$ for the target non-speaking participant.
+
+\subsection{Semi-Supervised Clustering Strategy}
+Given the constraint of limited labeled data, we apply a semi-supervised clustering approach that discovers latent engagement patterns in unlabeled training data ($X_{train}$) and subsequently maps these patterns to engagement categories.
+
+\subsubsection{Unsupervised Cluster Discovery}
+Three clustering algorithms are applied to unlabeled training segments to identify natural groupings in the feature space:
+
+\begin{itemize}
+    \item \textbf{K-Means Clustering:} Partitions the feature space into $k$ spherical clusters by minimizing within-cluster sum of squared distances. This algorithm is selected for its computational efficiency and interpretability, making it suitable for the initial exploration of engagement patterns. Its assumption of spherical clusters aligns well with feature spaces where engagement levels may form compact, well-separated groups. We systematically explore different $k$ values, using internal validation metrics such as the Silhouette score, Davies-Bouldin index, and the Calinski-Harabasz index to determine the optimal number of clusters.
+    
+    \item \textbf{Gaussian Mixture Models (GMM):} Models the feature distribution as a mixture of Gaussian components, allowing for probabilistic cluster membership and non-spherical cluster shapes. GMM is chosen to address potential limitations of K-Means when engagement patterns exhibit overlapping boundaries or elliptical distributions in the feature space. The probabilistic nature of GMM provides uncertainty quantification, which is valuable when engagement levels exist on a continuum rather than discrete categories. Model selection is performed using the Bayesian Information Criterion (BIC) and Akaike Information Criterion (AIC) to balance the complexity and fit of the model.
+    
+    \item \textbf{Hierarchical Clustering:} Employs agglomerative clustering with Ward linkage to build a hierarchy of clusters. This method is selected for its ability to reveal the natural structure of engagement patterns without predefining cluster numbers. The hierarchical approach is particularly valuable for understanding the relationships between different engagement levels and identifying potential subcategories within major engagement states. The resulting dendrogram provides insight into optimal number of clusters and helps uncover engagement patterns at multiple levels.
+\end{itemize}
+
+\subsubsection{Cluster Label Assignment}
+To transform unsupervised clusters into meaningful engagement categories, we develop a minimal supervision strategy:
+\begin{enumerate}
+    \item Select the optimal clustering configuration based on internal validation metrics
+    \item Randomly sample a small number of segments from each discovered cluster
+    \item Manually annotate these sampled segments with engagement labels
+    \item Assign the majority label from the sampled segments to the entire cluster
+\end{enumerate}
+
+\subsection{Multi-Person Alignment Framework}
+To investigate our main research question of whether contextual information from other meeting participants improves engagement prediction, we propose two distinct feature representation strategies. For each video segment, we extract multimodal features from all three participants present in the meeting, including deep neural network features, Facial Expressions estimation features, and manually crafted behavioral features. Details of feature extraction procedures are provided in Section 3.2.
+
+The baseline approach uses only features extracted from the target non-speaking participant, where all feature components are extracted solely from the target participant's video data. Our proposed method incorporates temporally synchronized features from all three participants, extending the baseline by adding contextual features from the other two participants present in each video segment. This representation enables the model to capture social dynamics, behavioral mirroring, and contextual engagement cues that may influence the target participant's engagement state.
+
+
+\subsection{Evaluation Framework}
+
+\subsubsection{Direct Cluster Evaluation}
+The performance of our semi-supervised clustering approach is assessed through a direct cluster assignment methodology applied to the human-labeled test segments. For each test segment $x_i \in X_{test}$, we apply distance-based cluster assignment where the segment is mapped to its nearest training cluster. The distance metric varies according to the clustering algorithm: Euclidean distance is used for K-Means and Hierarchical clustering, and posterior probability for Gaussian Mixture Models.
+
+After cluster assignment, each test segment is assigned the engagement label of its corresponding cluster, as determined during the label propagation phase. The predicted labels are evaluated against ground truth annotations using standard classification metrics, including accuracy, precision, recall, and F1-score to quantify the effectiveness of our clustering-based prediction framework.
+
+\subsubsection{Comparative Analysis}
+To systematically investigate our central research hypothesis, we conduct a comprehensive comparative evaluation across multiple dimensions. Each of the three clustering algorithms (K-Means, GMM, and Hierarchical clustering) is applied to both feature representation strategies: the individual-centric baseline and the proposed multi-person aligned approach.
+
+Performance comparison between baseline and proposed methods is conducted through statistical analysis of classification metrics, enabling quantitative assessment of the contribution of contextual information. Additionally, we perform feature importance analysis to identify which contextual features most significantly contribute to engagement prediction accuracy. Qualitative examination of the resulting clustering patterns provides insights into how multi-person dynamics affect engagement classification.
+
+This experimental framework enables thorough evaluation of whether incorporating temporally synchronized contextual information from co-present participants improves the accuracy of engagement prediction for non-speaking individuals in online meeting.
+
+\section{Experimental Setup}
+\subsection{Dataset}
+The dataset is built upon the GEHM Zoom Corpus \cite{paggio2024gehm}, which consists of 12 real-world Zoom meetings held by researchers from the GEHM network. The meetings last 8 hours in total, with an average duration of 40 minutes each. Each meeting is conducted in English and involves 5-9 participants, including native and non-native English speakers. The corpus provides various multimodal data, including original video and audio recordings, separated speaker videos and audios, speech transcriptions, as well as body and facial keypoints extracted using OpenPose\cite{cao2019openpose}. For our research, we sampled a subset of preprocessed video segments for manual engagement labeling. The details are covered in Section 2.3.
+
+To prepare the dataset for the experiment, we segmented and applied several filtering procedures to ensure data quality and diversity. Each separated speaker's video was divided into 5-second segments with a 2-second overlap. As our research focuses on non-speaking participants, we filtered out segments where people were actively speaking(including asking questions or verbal responses), according to aligned speech annotations in TextGrid files. We also removed segments where participants are not visible in at least 95\% of frames, based on OpenPose detection. To avoid visual redundancy, we clustered visually similar segments based on the embedding extracted from CLIP\cite{radford2021learning} and kept only one representative segment for each cluster. In addition, we filtered out segments where participants were facing significantly away from the screen, based on their average head orientation, to ensure all participants face the screen at similar angles. 
+
+For each selected segment, we also selected reference videos of two randomly chosen co-present participants
+from the same meeting and timeframe. These reference segments provide contextual behavioral cues for the target participant's engagement prediction. After preprocessing, \textbf{549} segments were retained for further analysis.
+
+
+\subsection{Feature Extraction}
+We extracted a set of multimodal features from the retained video to capture non-verbal cues, which are potential indicators of engagement level, including manually crafted features(head pose, head movement, hand gesture), facial expressions (Facial Action Units),  and high-level semantic representations. These features were extracted using several computer vision algorithms. Samples of feature extraction are available in Appendix A.
+
+\subsubsection{Manual Features}
+\textit{Head pose} has been widely used as an indicator for assessing engagement and attention in online learning and meeting contexts\cite{gupta2016daisee}\cite{dewan2019engagement}. We approximated 3D head orientation using the 2D facial keypoints, including nose and eyes detected by OpenPose. For each segment, we computed the average head orientation and its variability to capture overall head direction and its consistency. Variability in head pose may signal attention shifts or disengagement.
+
+\textit{Head movement} has been used to detect student’s engagement in online learning\cite{sharma2022engagement}. Given the similarities in non-verbal behavior between online learning and online meetings, we explored its role in classifying engagement in online meetings. Its dynamics were captured by computing the angular changes in head orientation frame by frame. We extracted features including average and maximum angular velocities, total movement and movement variability across each axis. We also computed a movement intensity score (movement per section) and categorized it into four levels: static, low, moderate and high.
+
+\textit{Head nods and shakes} are associated with backchannel feedback. These features were extracted by analyzing peak-valley structures in the pitch and yaw angle series, respectively. Both nods and shakes were quantified by frequency and type. Nods are further categorized into slow and fast nods.
+
+\textit{Hand gestures}
+were detected by using wrist positions from MediaPose\cite{lugaresi2019mediapipe} and facial keypoints from OpenFace\cite{baltrusaitis2018openface}. Based on distance heuristics, we identified gestures including chin rest, face touching, forehead support, and hand raise. For each gesture, we calculated the proportion of frames where it was detected and considered it occurred if this ratio exceeded a predefined threshold. These behaviors may reflect engagement states, such as focus or fatigue. 
+
+\subsubsection{Facial Expressions}
+Facial Action Units(AUs) were extracted using OpenFace\cite{baltrusaitis2018openface} to capture facial expression cues. For each AU, we computed the mean and variability of its activation intensities. We also calculated the count, duration, and onset time of activation events, where the AU’s intensity exceeds a predefined threshold. To reduce feature dimensionality, we applied Principal Component Analysis to the AU feature matrix and kept the top 20 principal components, which accounted for over 98\% of the explained variance. Details of the PCA results are available in Appendix A. 
+
+\subsubsection{Deep Neural Features}
+In addition to the manually defined features, we also extracted deep neural network features using CLIP\cite{radford2021learning}, a pretrained language-image model. The features provide high-level semantic representations that capture global and abstract visual context from the segments. It offers a more comprehensive representation of the segments. The DNN feature set was reduced to 100 dimensions using PCA, following the same procedure as for AU features(Appendix A). 
+
+\subsection{Alignment features}
+The alignment features are designed to quantify the behavioral similarity between a target participant and their co-participants during the same timeframe. These features include the cosine similarity between pairs of PCA-reduced AUs features and DNN embeddings, capturing facial expression and global appearance-level alignment, respectively. Additionally, we compute the element-wise absolute difference between manually engineered features across the same participant pairs. Together, these alignment features provide a structured representation of how closely a participant's behavior aligns with that of others, serving as input signals for downstream engagement prediction.
+
+\subsection{Manual Annotation}
+We partitioned the preprocessed data into training and test sets, ensuring that test segments were not seen during training. The test set was manually annotated for engagement classification. The degree of engagement was manually annotated by 4 non-expert annotators following a labeling guideline. We defined a 3-level scale for labeling engagement: disengagement, intermittent engagement, and active engagement. Annotators were required to watch the selected 107 segments and choose an engagement level for each segment. We also included an ‘unclear’ option for cases where the annotators were unable to decide the engagement level of a segment. 
+
+After gathering the annotation data, we evaluated inter-annotator agreement using Fleiss' Kappa\cite{fleiss1971measuring} and Cohen’s Kappa\cite{cohen1960coefficient} score. One annotator’s labels largely diverged from the others, with an average Cohen’s Kappa score of 0.172, indicating poor agreement with other annotators. Therefore, we excluded this annotator’s labels in the final dataset, resulting in a Fleiss' Kappa of 0.42.
+
+The dataset was further analyzed regarding the agreement distribution between the three annotators. Segments where annotators failed to reach a majority agreement or where the majority of annotators labeled ‘unclear’ were excluded from the final dataset. In the remaining 102 segments, annotators reached full agreement on 46 segments, and the rest were labeled based on majority voting.
+
+Segments that lacked two reference participant videos were further excluded, as this prevented the extraction of alignment features. The final test set contained 89 valid segments, which included 44 “Active engagement” segments, 28 “Intermittent engagement” segments and 17 “Disengagement” segments. This class distribution is imbalanced across classes, which may affect the performance of clustering-based classification models. Hence, we use weighted F1-score as our main evaluation metric to account for the imbalance.
+
+
+
+\section{Results and Discussion}
+\subsection{Results}
+% Presentation of findings/results (with tables,
+% graphs, etc.)
+% \begin{itemize}
+%     \item Accuracy
+%     \item classification report
+%     \item confusion mattrix
+% \end{itemize}
+
+Our experimental results, as summarized in Table \ref{tab:result}, present the F1-scores for engagement prediction using direct cluster assignment from various clustering methods, both with and without alignment features.
+
+\begin{table}[ht]
+  \caption{Result (F1-score) of engagement prediction of using direct assignment from different clustering methods}
+  \label{tab:result}
+  \centering
+  \begin{tabular}{lcccccc}
+    \toprule
+    Method & \makecell{Alignment\\features} &\makecell{Number\\cluster}& \makecell{Active\\engagement} &  \makecell{Intermittent\\engagement} & Disengagement & \makecell{Weighted\\average} \\
+    \midrule
+    K-Means         & Yes &11& 0.63 & 0.23  & 0.10  & 0.40  \\
+    GMM             & Yes &5& 0.00 & 0.48  & 0.00  & 0.15  \\
+    Hierarchical    & Yes &8& 0.04 & 0.50  & 0.20  & 0.22  \\
+    K-Means         & No  &10& 0.32 & 0.38  & 0.15  & 0.31 \\
+    GMM             & No  &7& 0.00 & 0.00  & 0.32  & 0.06  \\
+    Hierarchical    & No  &5& 0.00 & 0.49  & 0.00  & 0.15  \\
+        \bottomrule
+  \end{tabular}
+\end{table}
+
+The inclusion of alignment features generally improved our engagement prediction, especially for K-Means clustering. Including these features increased the weighted average F1-score of K-Means clustering from 0.31 to 0.40, indicating a clear improvement. This suggests that incorporating contextual behavioral cues from other participants can enhance how we classify engagement levels. For instance, the F1-score for "Active engagement" with K-Means notably jumped from 0.32 to 0.63 when alignment features were included. This strongly supports our hypothesis that behavioral alignment patterns among non-speaking participants can boost engagement classification accuracy.
+
+\begin{table}[ht]
+  \caption{Classification report for engagement prediction of K-mean clustering with alignment features.}
+  \label{tab:classification_report}
+  \centering
+  \begin{tabular}{lccc}
+    \toprule
+    Class & Precision & Recall & F1-score \\
+    \midrule
+    Active engagement        & 0.51 & 0.82 & 0.63 \\
+    Intermittent engagement  & 0.33 & 0.18 & 0.23 \\
+    Disengagement            & 0.33 & 0.06 & 0.10 \\
+    \midrule
+    Accuracy                 &      &      & 0.47 \\
+    Macro avg                & 0.39 & 0.35 & 0.32 \\
+    Weighted avg             & 0.42 & 0.47 & 0.40 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+However, the positive impact of alignment features wasn't consistent across all methods. Both Gaussian Mixture Models (GMM) and Hierarchical clustering performed very poorly, often failing to classify engagement and instead returning only one class, regardless of whether alignment features were used. Although Hierarchical clustering showed a slight improvement with alignment features—its "Disengagement" F1-score rose from 0.00 to 0.20, leading to an increase in its weighted average F1-score from 0.15 to 0.22—its overall performance remained low. This consistent underperformance suggests that these methods may not be well-suited for capturing the underlying structure of engagement patterns in our dataset. This could be due to the complex, non-linear nature of the feature space or the absence of distinct, well-separated clusters that these algorithms typically require for effective partitioning.
+
+Table \ref{tab:classification_report} provides a comprehensive overview of the K-Means clustering method's classification performance when augmented with alignment features, which yielded our best results. The model achieved an accuracy of 0.47. "Active engagement" showed the strongest performance with an F1-score of 0.63 and a high recall of 0.82, demonstrating the model's effectiveness in identifying these instances. Conversely, "Intermittent engagement" and "Disengagement" had notably lower F1-scores of 0.23 and 0.10, respectively. The model particularly struggled with "Disengagement," evidenced by its very low recall of 0.06, suggesting frequent misclassification. While the precision for both "Intermittent engagement" and "Disengagement" was 0.33, meaning about one-third of their predictions were correct.
+
+\subsection{Discussion}
+
+% \begin{itemize}
+%     \item Explanation and interpretation of main results.
+%     \item Discussion of strengths and limitations of approach.
+%     \item Assessment of findings with respect to initial question and hypotheses.
+% \end{itemize}
+
+Our semi-supervised approach effectively addresses the challenge of limited labeled data in engagement prediction, demonstrating practical scalability for real-world applications. The multi-person alignment framework represents a novel contribution by explicitly modeling social dynamics rather than treating engagement as an isolated individual phenomenon.
+However, the modest overall performance (best F1-score of 0.40) and particularly poor intermittent engagement and disengagement classification indicate that distinguishing subtle engagement states remains challenging. The moderate inter-annotator agreement (Fleiss' Kappa of 0.42) establishes an upper bound on automated prediction performance and highlights the inherent subjectivity of engagement assessment. Our limited dataset size constrains generalizability across diverse meeting contexts and participant demographics.
+
+Our hypothesis regarding non-verbal cues receives partial support, while meaningful classification was achieved, moderate performance suggests non-verbal features alone provide incomplete engagement information. Our hypothesis about behavioral alignment patterns receives strong empirical support within the K-Means framework, though the failure of other methods to benefit suggests effectiveness depends critically on the modeling approach.
+The differential success across algorithms highlights the importance of method selection in semi-supervised engagement prediction and suggests that simpler models may be preferable with limited labeled data, though more sophisticated approaches might benefit from larger datasets. 
+
+Feature importance analysis reveals that both individual behavioral features and alignment-based features contribute significantly to K-Means clustering performance. The top-ranking features include manually crafted behavioral indicators alongside facial action unit components and alignment difference measures between the target participant and reference participants. Notably, several alignment features appear among the most discriminative features: differences in yaw velocity variability (manual\_diff\_ref1\_18, manual\_diff\_ref1\_9), shake frequency (manual\_diff\_ref1\_34), and shake type patterns (manual\_diff\_ref1\_37) between the target participant and co-attendees. These findings suggest that engagement states are characterized not only by individual behaviors but also by how a participant's head movement dynamics and gestural patterns diverge from or align with those of other meeting attendees, providing empirical evidence for our multi-person alignment framework (see Appendix B for detailed feature rankings).
+
+\section{Conclusion}
+% \begin{itemize}
+%     \item Limitation
+%     \item Proposal of perspectives for future research.
+% \end{itemize}
+This study tackled the challenge of predicting engagement in non-speaking participants during online meetings, a crucial yet often overlooked aspect of virtual communication. Our semi-supervised learning framework successfully addressed the common issue of limited labeled data, offering a practical approach for real-world applications. A key contribution is our multi-person alignment framework, which moves beyond individual behaviors to explicitly model how social dynamics influence engagement. While non-verbal cues provided informative signals, the moderate overall performance (best F1-score of 0.40) suggests they offer an incomplete picture, especially for nuanced states like "Intermittent engagement." This complexity is also reflected in the moderate inter-annotator agreement (Fleiss' Kappa of 0.42), which sets a realistic upper bound for automated prediction.
+
+Crucially, our findings strongly support the value of behavioral alignment patterns. Incorporating these features significantly improved engagement classification, particularly with K-Means clustering, underscoring that a participant's engagement is often revealed through their behavioral synchronization with others. This highlights the importance of context in understanding engagement. The varying success across clustering algorithms emphasizes that model selection is critical, with simpler models potentially performing better with limited data. Future work should focus on leveraging larger, more diverse datasets, exploring advanced deep learning architectures for temporal modeling, and developing personalized engagement models to further enhance accuracy and generalize across different meeting contexts.
+
+
+
+
+%%
+%% Define the bibliography file to be used
+\bibliography{sample}
+\newpage
+\appendix 
+
+\section{Appendix: Sample of feature extraction}
+\label{appendix:A}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[width=\linewidth]{data_extraction_visualziation.png}
+        \caption{} % Add caption if needed
+        \label{fig:headpose}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[width=\linewidth]{data_extraction_2.png}
+        \caption{} % Add caption if needed
+        \label{fig:second}
+    \end{subfigure}
+    \caption{Examples of visual features extracted from meeting recordings}
+    \label{fig:combined}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[width=\linewidth]{pca_for_dnn.png}
+        \caption{PCA projection of DNN features across all segments}
+        \label{fig:pca_dnn}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[width=\linewidth]{pca_for_au.png}
+        \caption{PCA projection of AU features across all segments}
+        \label{fig:pca_au}
+    \end{subfigure}
+    \caption{Cumulative explained variance by principal components for DNN and AU features}
+    \label{fig:pca_combined}
+\end{figure}
+\newpage
+\section{Appendix: Feature Importances using Anova F-statistic} \label{appendix:B}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{kmean_importance_feature_align.png}
+    \caption{Most important features for K-Means (ANOVA F-statistic)}
+    \label{fig:enter-label}
+\end{figure}
+
+\end{document}
+%%
+%% End of file

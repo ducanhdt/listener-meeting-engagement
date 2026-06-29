@@ -1,0 +1,103 @@
+meeting,participant,video_clip,DucManh,Charlotte,Ducanh,segment_id,agreement,majority_label_3,vote_agreement
+20210323,SP01F,clip_732_737.mp4,Active engagement,Active engagement,Active engagement,20210323-SP01F_clip_732_737,1.0,Active engagement,full
+20210323,SP01F,clip_747_752.mp4,Active engagement,Active engagement,Active engagement,20210323-SP01F_clip_747_752,1.0,Active engagement,full
+20210323,SP01F,clip_837_842.mp4,Intermittent engagement,Active engagement,Active engagement,20210323-SP01F_clip_837_842,0.6666666666666666,Active engagement,majority
+20210323,SP01F,clip_846_851.mp4,Active engagement,Active engagement,Intermittent engagement,20210323-SP01F_clip_846_851,0.6666666666666666,Active engagement,majority
+20210323,SP01F,clip_849_854.mp4,Active engagement,Active engagement,Intermittent engagement,20210323-SP01F_clip_849_854,0.6666666666666666,Active engagement,majority
+20210323,SP01F,clip_852_857.mp4,Intermittent engagement,Active engagement,Active engagement,20210323-SP01F_clip_852_857,0.6666666666666666,Active engagement,majority
+20210323,SP01F,clip_948_953.mp4,Disengagement,Active engagement,Disengagement,20210323-SP01F_clip_948_953,0.6666666666666666,Disengagement,majority
+20210323,SP01F,clip_957_962.mp4,Active engagement,Intermittent engagement,Intermittent engagement,20210323-SP01F_clip_957_962,0.6666666666666666,Intermittent engagement,majority
+20210323,SP01F,clip_966_971.mp4,Disengagement,Intermittent engagement,Disengagement,20210323-SP01F_clip_966_971,0.6666666666666666,Disengagement,majority
+20210323,SP01F,clip_1248_1253.mp4,Active engagement,Active engagement,Active engagement,20210323-SP01F_clip_1248_1253,1.0,Active engagement,full
+20210323,SP06M,clip_417_422.mp4,Active engagement,Active engagement,Active engagement,20210323-SP06M_clip_417_422,1.0,Active engagement,full
+20210323,SP06M,clip_426_431.mp4,Active engagement,Active engagement,Active engagement,20210323-SP06M_clip_426_431,1.0,Active engagement,full
+20210323,SP06M,clip_438_443.mp4,Intermittent engagement,Intermittent engagement,Active engagement,20210323-SP06M_clip_438_443,0.6666666666666666,Intermittent engagement,majority
+20210323,SP06M,clip_618_623.mp4,Intermittent engagement,Intermittent engagement,Intermittent engagement,20210323-SP06M_clip_618_623,1.0,Intermittent engagement,full
+20210323,SP06M,clip_621_626.mp4,Intermittent engagement,Intermittent engagement,Disengagement,20210323-SP06M_clip_621_626,0.6666666666666666,Intermittent engagement,majority
+20210323,SP06M,clip_810_815.mp4,Active engagement,Active engagement,Intermittent engagement,20210323-SP06M_clip_810_815,0.6666666666666666,Active engagement,majority
+20210323,SP06M,clip_984_989.mp4,Disengagement,Disengagement,Disengagement,20210323-SP06M_clip_984_989,1.0,Disengagement,full
+20210323,SP06M,clip_1002_1007.mp4,Disengagement,Disengagement,Disengagement,20210323-SP06M_clip_1002_1007,1.0,Disengagement,full
+20210323,SP06M,clip_1128_1133.mp4,Intermittent engagement,Active engagement,Active engagement,20210323-SP06M_clip_1128_1133,0.6666666666666666,Active engagement,majority
+20210323,SP06M,clip_1149_1154.mp4,Disengagement,Disengagement,Disengagement,20210323-SP06M_clip_1149_1154,1.0,Disengagement,full
+20210323,SP07F,clip_3_8.mp4,Active engagement,Intermittent engagement,Intermittent engagement,20210323-SP07F_clip_3_8,0.6666666666666666,Intermittent engagement,majority
+20210323,SP07F,clip_210_215.mp4,Active engagement,Active engagement,Active engagement,20210323-SP07F_clip_210_215,1.0,Active engagement,full
+20210323,SP07F,clip_249_254.mp4,Intermittent engagement,Intermittent engagement,Intermittent engagement,20210323-SP07F_clip_249_254,1.0,Intermittent engagement,full
+20210323,SP07F,clip_255_260.mp4,Intermittent engagement,Active engagement,Intermittent engagement,20210323-SP07F_clip_255_260,0.6666666666666666,Intermittent engagement,majority
+20210323,SP07F,clip_273_278.mp4,Active engagement,Active engagement,Active engagement,20210323-SP07F_clip_273_278,1.0,Active engagement,full
+20210323,SP07F,clip_378_383.mp4,Active engagement,Active engagement,Active engagement,20210323-SP07F_clip_378_383,1.0,Active engagement,full
+20210323,SP07F,clip_1074_1079.mp4,Active engagement,Active engagement,Intermittent engagement,20210323-SP07F_clip_1074_1079,0.6666666666666666,Active engagement,majority
+20210323,SP07F,clip_1107_1112.mp4,Intermittent engagement,Intermittent engagement,Intermittent engagement,20210323-SP07F_clip_1107_1112,1.0,Intermittent engagement,full
+20210323,SP07F,clip_1113_1118.mp4,Active engagement,Intermittent engagement,Intermittent engagement,20210323-SP07F_clip_1113_1118,0.6666666666666666,Intermittent engagement,majority
+20210323,SP07F,clip_1116_1121.mp4,Active engagement,Active engagement,Disengagement,20210323-SP07F_clip_1116_1121,0.6666666666666666,Active engagement,majority
+20210323,SP07F,clip_1182_1187.mp4,Intermittent engagement,Intermittent engagement,Disengagement,20210323-SP07F_clip_1182_1187,0.6666666666666666,Intermittent engagement,majority
+20210504,SP09M,clip_3_8.mp4,Active engagement,Disengagement,Disengagement,20210504-SP09M_clip_3_8,0.6666666666666666,Disengagement,majority
+20210504,SP09M,clip_276_281.mp4,Intermittent engagement,Active engagement,Intermittent engagement,20210504-SP09M_clip_276_281,0.6666666666666666,Intermittent engagement,majority
+20210504,SP09M,clip_408_413.mp4,Disengagement,Active engagement,Active engagement,20210504-SP09M_clip_408_413,0.6666666666666666,Active engagement,majority
+20210504,SP09M,clip_519_524.mp4,Intermittent engagement,Intermittent engagement,Intermittent engagement,20210504-SP09M_clip_519_524,1.0,Intermittent engagement,full
+20210504,SP09M,clip_573_578.mp4,Active engagement,Active engagement,Intermittent engagement,20210504-SP09M_clip_573_578,0.6666666666666666,Active engagement,majority
+20210504,SP09M,clip_576_581.mp4,Active engagement,Active engagement,Intermittent engagement,20210504-SP09M_clip_576_581,0.6666666666666666,Active engagement,majority
+20210504,SP09M,clip_582_587.mp4,Intermittent engagement,Active engagement,Intermittent engagement,20210504-SP09M_clip_582_587,0.6666666666666666,Intermittent engagement,majority
+20210504,SP09M,clip_642_647.mp4,Disengagement,Active engagement,Disengagement,20210504-SP09M_clip_642_647,0.6666666666666666,Disengagement,majority
+20210504,SP04F,clip_96_101.mp4,Intermittent engagement,Intermittent engagement,Disengagement,20210504-SP04F_clip_96_101,0.6666666666666666,Intermittent engagement,majority
+20210504,SP04F,clip_147_152.mp4,Active engagement,Active engagement,Active engagement,20210504-SP04F_clip_147_152,1.0,Active engagement,full
+20210504,SP04F,clip_291_296.mp4,Active engagement,Active engagement,Active engagement,20210504-SP04F_clip_291_296,1.0,Active engagement,full
+20210504,SP04F,clip_336_341.mp4,Intermittent engagement,unclear,Intermittent engagement,20210504-SP04F_clip_336_341,0.6666666666666666,Intermittent engagement,majority
+20210504,SP04F,clip_372_377.mp4,Active engagement,Intermittent engagement,Active engagement,20210504-SP04F_clip_372_377,0.6666666666666666,Active engagement,majority
+20210504,SP04F,clip_375_380.mp4,Active engagement,Active engagement,Intermittent engagement,20210504-SP04F_clip_375_380,0.6666666666666666,Active engagement,majority
+20210504,SP04F,clip_552_557.mp4,Intermittent engagement,Intermittent engagement,Disengagement,20210504-SP04F_clip_552_557,0.6666666666666666,Intermittent engagement,majority
+20210504,SP04F,clip_555_560.mp4,Disengagement,Disengagement,Disengagement,20210504-SP04F_clip_555_560,1.0,Disengagement,full
+20210504,SP04F,clip_708_713.mp4,Active engagement,Active engagement,Active engagement,20210504-SP04F_clip_708_713,1.0,Active engagement,full
+20210504,SP04F,clip_711_716.mp4,Active engagement,Active engagement,Active engagement,20210504-SP04F_clip_711_716,1.0,Active engagement,full
+20210504,SP08M,clip_168_173.mp4,Intermittent engagement,Intermittent engagement,Intermittent engagement,20210504-SP08M_clip_168_173,1.0,Intermittent engagement,full
+20210504,SP08M,clip_462_467.mp4,Active engagement,Intermittent engagement,Intermittent engagement,20210504-SP08M_clip_462_467,0.6666666666666666,Intermittent engagement,majority
+20210504,SP08M,clip_339_344.mp4,Active engagement,Active engagement,Active engagement,20210504-SP08M_clip_339_344,1.0,Active engagement,full
+20210504,SP08M,clip_501_506.mp4,Active engagement,Active engagement,Active engagement,20210504-SP08M_clip_501_506,1.0,Active engagement,full
+20210504,SP08M,clip_576_581.mp4,Active engagement,Active engagement,Active engagement,20210504-SP08M_clip_576_581,1.0,Active engagement,full
+20210504,SP08M,clip_702_707.mp4,Intermittent engagement,Intermittent engagement,Active engagement,20210504-SP08M_clip_702_707,0.6666666666666666,Intermittent engagement,majority
+20210616,SP06M,clip_1131_1136.mp4,Active engagement,Active engagement,Active engagement,20210616-SP06M_clip_1131_1136,1.0,Active engagement,full
+20210616,SP06M,clip_1566_1571.mp4,Active engagement,Active engagement,Active engagement,20210616-SP06M_clip_1566_1571,1.0,Active engagement,full
+20210616,SP06M,clip_1695_1700.mp4,Active engagement,Active engagement,Intermittent engagement,20210616-SP06M_clip_1695_1700,0.6666666666666666,Active engagement,majority
+20210616,SP06M,clip_1719_1724.mp4,Active engagement,Active engagement,Intermittent engagement,20210616-SP06M_clip_1719_1724,0.6666666666666666,Active engagement,majority
+20210616,SP06M,clip_1764_1769.mp4,Disengagement,Disengagement,Disengagement,20210616-SP06M_clip_1764_1769,1.0,Disengagement,full
+20210616,SP06M,clip_1926_1931.mp4,Disengagement,Disengagement,Disengagement,20210616-SP06M_clip_1926_1931,1.0,Disengagement,full
+20210616,SP06M,clip_2157_2162.mp4,Disengagement,Disengagement,Disengagement,20210616-SP06M_clip_2157_2162,1.0,Disengagement,full
+20210616,SP06M,clip_2868_2873.mp4,Active engagement,Intermittent engagement,Intermittent engagement,20210616-SP06M_clip_2868_2873,0.6666666666666666,Intermittent engagement,majority
+20210616,SP06M,clip_3081_3086.mp4,Active engagement,Active engagement,Active engagement,20210616-SP06M_clip_3081_3086,1.0,Active engagement,full
+20210616,SP02F,clip_435_440.mp4,Active engagement,Intermittent engagement,Intermittent engagement,20210616-SP02F_clip_435_440,0.6666666666666666,Intermittent engagement,majority
+20210616,SP02F,clip_666_671.mp4,Active engagement,Active engagement,Active engagement,20210616-SP02F_clip_666_671,1.0,Active engagement,full
+20210616,SP02F,clip_1449_1454.mp4,Intermittent engagement,Disengagement,Disengagement,20210616-SP02F_clip_1449_1454,0.6666666666666666,Disengagement,majority
+20210616,SP02F,clip_1941_1946.mp4,Intermittent engagement,Intermittent engagement,Active engagement,20210616-SP02F_clip_1941_1946,0.6666666666666666,Intermittent engagement,majority
+20210616,SP02F,clip_2037_2042.mp4,Active engagement,Active engagement,Active engagement,20210616-SP02F_clip_2037_2042,1.0,Active engagement,full
+20210616,SP02F,clip_2433_2438.mp4,Intermittent engagement,Intermittent engagement,Active engagement,20210616-SP02F_clip_2433_2438,0.6666666666666666,Intermittent engagement,majority
+20210616,SP02F,clip_2436_2441.mp4,Intermittent engagement,Active engagement,Active engagement,20210616-SP02F_clip_2436_2441,0.6666666666666666,Active engagement,majority
+20210616,SP02F,clip_2643_2648.mp4,Active engagement,Active engagement,Active engagement,20210616-SP02F_clip_2643_2648,1.0,Active engagement,full
+20210616,SP02F,clip_2769_2774.mp4,Intermittent engagement,Intermittent engagement,Intermittent engagement,20210616-SP02F_clip_2769_2774,1.0,Intermittent engagement,full
+20210616,SP05F,clip_9_14.mp4,Intermittent engagement,Intermittent engagement,Disengagement,20210616-SP05F_clip_9_14,0.6666666666666666,Intermittent engagement,majority
+20210616,SP05F,clip_84_89.mp4,Intermittent engagement,Intermittent engagement,Disengagement,20210616-SP05F_clip_84_89,0.6666666666666666,Intermittent engagement,majority
+20210616,SP05F,clip_99_104.mp4,Disengagement,Intermittent engagement,Disengagement,20210616-SP05F_clip_99_104,0.6666666666666666,Disengagement,majority
+20210616,SP05F,clip_108_113.mp4,Disengagement,Disengagement,Intermittent engagement,20210616-SP05F_clip_108_113,0.6666666666666666,Disengagement,majority
+20210616,SP05F,clip_444_449.mp4,Active engagement,Active engagement,Active engagement,20210616-SP05F_clip_444_449,1.0,Active engagement,full
+20210616,SP05F,clip_699_704.mp4,Intermittent engagement,Intermittent engagement,Intermittent engagement,20210616-SP05F_clip_699_704,1.0,Intermittent engagement,full
+20210616,SP05F,clip_1293_1298.mp4,Intermittent engagement,Active engagement,Intermittent engagement,20210616-SP05F_clip_1293_1298,0.6666666666666666,Intermittent engagement,majority
+20210616,SP05F,clip_1863_1868.mp4,Active engagement,unclear,Active engagement,20210616-SP05F_clip_1863_1868,0.6666666666666666,Active engagement,majority
+20210616,SP05F,clip_2160_2165.mp4,Active engagement,Active engagement,Active engagement,20210616-SP05F_clip_2160_2165,1.0,Active engagement,full
+20210616,SP05F,clip_2337_2342.mp4,Active engagement,Active engagement,Active engagement,20210616-SP05F_clip_2337_2342,1.0,Active engagement,full
+20220204,SP03M,clip_0_5.mp4,Active engagement,Active engagement,Intermittent engagement,20220204-SP03M_clip_0_5,0.6666666666666666,Active engagement,majority
+20220204,SP03M,clip_63_68.mp4,Disengagement,Disengagement,Disengagement,20220204-SP03M_clip_63_68,1.0,Disengagement,full
+20220204,SP03M,clip_291_296.mp4,Disengagement,Intermittent engagement,Disengagement,20220204-SP03M_clip_291_296,0.6666666666666666,Disengagement,majority
+20220204,SP03M,clip_594_599.mp4,Intermittent engagement,Active engagement,Active engagement,20220204-SP03M_clip_594_599,0.6666666666666666,Active engagement,majority
+20220204,SP03M,clip_597_602.mp4,Active engagement,Active engagement,Active engagement,20220204-SP03M_clip_597_602,1.0,Active engagement,full
+20220204,SP03M,clip_2196_2201.mp4,Active engagement,Active engagement,Active engagement,20220204-SP03M_clip_2196_2201,1.0,Active engagement,full
+20220204,SP03M,clip_2367_2372.mp4,Disengagement,Disengagement,Intermittent engagement,20220204-SP03M_clip_2367_2372,0.6666666666666666,Disengagement,majority
+20220204,SP03M,clip_2634_2639.mp4,Disengagement,Disengagement,Disengagement,20220204-SP03M_clip_2634_2639,1.0,Disengagement,full
+20220204,SP03M,clip_2856_2859.84.mp4,Intermittent engagement,Active engagement,Intermittent engagement,20220204-SP03M_clip_2856_2859.84,0.6666666666666666,Intermittent engagement,majority
+20220408,SP09M,clip_30_35.mp4,Active engagement,Active engagement,Active engagement,20220408-SP09M_clip_30_35,1.0,Active engagement,full
+20220408,SP09M,clip_66_71.mp4,Intermittent engagement,Active engagement,Intermittent engagement,20220408-SP09M_clip_66_71,0.6666666666666666,Intermittent engagement,majority
+20220408,SP09M,clip_72_77.mp4,Disengagement,Intermittent engagement,Disengagement,20220408-SP09M_clip_72_77,0.6666666666666666,Disengagement,majority
+20220408,SP09M,clip_300_305.mp4,Active engagement,Active engagement,Active engagement,20220408-SP09M_clip_300_305,1.0,Active engagement,full
+20220408,SP09M,clip_327_332.mp4,Active engagement,Active engagement,Intermittent engagement,20220408-SP09M_clip_327_332,0.6666666666666666,Active engagement,majority
+20220408,SP09M,clip_405_410.mp4,Intermittent engagement,Intermittent engagement,Intermittent engagement,20220408-SP09M_clip_405_410,1.0,Intermittent engagement,full
+20220408,SP09M,clip_585_590.mp4,Disengagement,Intermittent engagement,Disengagement,20220408-SP09M_clip_585_590,0.6666666666666666,Disengagement,majority
+20220408,SP09M,clip_3165_3170.mp4,Intermittent engagement,Active engagement,Active engagement,20220408-SP09M_clip_3165_3170,0.6666666666666666,Active engagement,majority
+20220408,SP09M,clip_3168_3173.mp4,Intermittent engagement,Active engagement,Intermittent engagement,20220408-SP09M_clip_3168_3173,0.6666666666666666,Intermittent engagement,majority
+20220408,SP09M,clip_3189_3194.mp4,Active engagement,Active engagement,Active engagement,20220408-SP09M_clip_3189_3194,1.0,Active engagement,full
